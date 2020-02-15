@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["node_modules/*", "interfaces/*"],
+      "@helpers/*": ["helpers/*"],
+      "@resolvers/*": ["graphql/resolvers/*"],
+      "@services/*": ["services/*"],
+      "@typeDefs/*": ["graphql/typeDefs/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "lib": ["es2015"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts"]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "user-system",
+  "version": "1.0.0",
+  "description": "Node.js user sign in/up system with use of Koa and GraphQl",
+  "main": "dist/server.js",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json --format stylish",
+    "test": "cross-env NODE_ENV=test jest --forceExit --coverage --verbose --runInBand --passWithNoTests --silent",
+    "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node -r tsconfig-paths/register ./src/server.ts",
+    "build": "tsc",
+    "serve": "node -r ./tsconfig-paths-bootstrap.js dist/server.js",
+    "start": "cross-env NODE_ENV=local npm run watch-server",
+    "prettier": "prettier --write \"src/**/*.{ts,js}\"",
+    "prettier-check": "prettier-check \"src/**/*.{ts,js}\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint && npm run build && npm run prettier"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graniczny/login-system.git"
+  },
+  "author": "Rav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/graniczny/login-system/issues"
+  },
+  "homepage": "https://github.com/graniczny/login-system#readme",
+  "dependencies": {
+    "apollo-server-koa": "^2.10.0",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.6.0",
+    "http-status-codes": "^1.4.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-router": "^8.0.7",
+    "lodash": "^4.17.15",
+    "tsconfig-paths": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.11.1",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-compose": "^3.2.5",
+    "@types/koa-router": "^7.4.0",
+    "@types/lodash": "^4.14.149",
+    "cross-env": "^7.0.0",
+    "husky": "^4.2.2",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "prettier-check": "^2.0.0",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.0.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.5"
+  }
+}
