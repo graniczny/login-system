@@ -1,6 +1,5 @@
 node_modules
 dist
 coverage
-todo
+todo.txt
 .env
-.vscode
