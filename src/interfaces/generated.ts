@@ -20,11 +20,9 @@ export interface Mutation {
   createUser?: Maybe<Scalars['Boolean']>;
 }
 
-
 export type MutationTestArgs = {
   name?: Maybe<Scalars['String']>;
 };
-
 
 export type MutationCreateUserArgs = {
   request?: Maybe<SignUpRequestInput>;
@@ -40,4 +38,3 @@ export interface SignUpRequestInput {
   email: Scalars['String'];
   role: Scalars['Int'];
 }
-
