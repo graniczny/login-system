@@ -15,17 +15,37 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+export interface LoggedUser {
+  name?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['Int']>;
+  token?: Maybe<Scalars['String']>;
+}
+
+export interface LoginRequestInput {
+  password: Scalars['String'];
+  email: Scalars['String'];
+}
+
 export interface Mutation {
   test?: Maybe<Scalars['String']>;
   createUser?: Maybe<Scalars['Boolean']>;
+  loginUser?: Maybe<LoggedUser>;
 }
+
 
 export type MutationTestArgs = {
   name?: Maybe<Scalars['String']>;
 };
 
+
 export type MutationCreateUserArgs = {
   request?: Maybe<SignUpRequestInput>;
+};
+
+
+export type MutationLoginUserArgs = {
+  request?: Maybe<LoginRequestInput>;
 };
 
 export interface Query {
@@ -38,3 +58,4 @@ export interface SignUpRequestInput {
   email: Scalars['String'];
   role: Scalars['Int'];
 }
+

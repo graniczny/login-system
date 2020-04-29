@@ -1,3 +1,4 @@
+import { authHelper } from '@helpers/authHelper';
 import { ApolloServer } from 'apollo-server-koa';
 import dotenv from 'dotenv';
 import koa from 'koa';
@@ -21,7 +22,40 @@ dotenv.config();
     synchronize: true
   });
 
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async obj => {
+      let { ctx } = obj;
+      if (!ctx) {
+        ctx = obj.connection.context;
+      }
+      try {
+        let user = null;
+        let authorizationToken: string = null;
+
+        if (ctx.request && ctx.request.header) {
+          authorizationToken = ctx.request.header.authorization;
+        }
+
+        if (authorizationToken) {
+          user = await authHelper(authorizationToken.replace('Bearer ', ''));
+        }
+
+        return {
+          ...ctx,
+          user,
+          authorization: authorizationToken
+        };
+      } catch (err) {
+        console.error(`Config server error: ${JSON.stringify(err)}`);
+        return {
+          authorization: null,
+          ...ctx
+        };
+      }
+    }
+  });
   const app = new koa();
   app.use(middlewares());
 
