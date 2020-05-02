@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { SignUpRequestInput } from 'generated';
 import { getRepository } from 'typeorm';
 
@@ -11,7 +12,13 @@ export async function createUser(
     return true;
   }
   const userRepo = getRepository(User);
-  const newUser = userRepo.create(userData);
+  const newUser = userRepo.create({
+    ...userData,
+    password: bcrypt.hashSync(
+      userData.password,
+      Number(process.env.CRYPT_ROUNDS)
+    )
+  });
   try {
     await userRepo.save(newUser);
   } catch (err) {

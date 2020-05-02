@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { LoggedUser, LoginRequestInput } from 'generated';
 import { getRepository } from 'typeorm';
 
@@ -10,6 +11,10 @@ export async function loginUser(
   const user = await findRegisteredUser(loginRequest);
   if (!user) {
     return {};
+  }
+  if (!bcrypt.compareSync(loginRequest.password, user.password)) {
+    console.info('[loginUser] bad user password');
+    return null;
   }
   const { name, email, role } = user;
   const token = await createToken({ name, email, role });
@@ -24,7 +29,7 @@ async function findRegisteredUser({
   const userRepo = getRepository(User);
   let user: User;
   try {
-    user = await userRepo.findOne({ email, password });
+    user = await userRepo.findOne({ email });
   } catch (err) {
     console.error(err);
     throw new Error('[findRegisteredUser] Problem while finding user');
