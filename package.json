@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/graniczny/login-system#readme",
   "dependencies": {
-    "apollo-server-koa": "^2.10.0",
+    "apollo-server-koa": "^2.14.2",
     "bcrypt": "^4.0.1",
     "dotenv": "^8.2.0",
     "graphql": "^14.6.0",
