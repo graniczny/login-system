@@ -43,7 +43,7 @@
     "lodash": "^4.17.15",
     "pg": "^7.18.2",
     "reflect-metadata": "^0.1.13",
-    "tsconfig-paths": "^3.9.0",
+    "tsconfig-paths": "^3.10.1",
     "typeorm": "^0.2.24"
   },
   "devDependencies": {
